@@ -21,7 +21,7 @@ class MakeSqlConnectionTest(unittest.TestCase):
         list_values = self.initialize_vlue()
         make_connection = MakeSqlConnection(list_values[0], list_values[3], list_values[1], list_values[2])
         command = 'select count(*) from ' + list_values[3]
-        row = make_connection.execution_command(command)
+        row = make_connection.execution_command(command, 0)
         self.assertEqual(row, 5511)
 
 

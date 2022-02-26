@@ -3,6 +3,7 @@ import pyodbc
 class MakeSqlConnection:
     def __init__(self, database_name, table_name, username, password, server='tcp:localhost,1433'):
         self.command = None
+        self.cursor = None
         self.database_name = database_name
         self.table_name = table_name
         self.username = username
@@ -20,23 +21,26 @@ class MakeSqlConnection:
 
     def __execution(self):
         cnxn = self.__make_connection()
-        cursor = cnxn.cursor()
-        return cursor
+        self.cursor = cnxn.cursor()
 
-    def execution_command(self, command, commit=False):
+    def execution_command(self, command, params=None, commit=False, command_type=None):
         self.command = command
-        cursor = self.__execution()
-        cursor.execute(self.command)
+        if params and commit:
+            self.cursor.execute(self.command, params)
+            self.cursor.commit()
+        else:
+            self.cursor.execute(self.command)
         if commit:
-            cursor.commit()
+            self.cursor.commit()
 
-        value = cursor.fetchone()
-        return value[0]
+        if command_type != 'insert':
+            value = self.cursor.fetchone()
+            return value[0]
 
     def __check_connection(self):
-        cursor = self.__execution()
+        self.__execution()
 
-        if cursor:
+        if self.cursor:
             return True
         else:
             return False
