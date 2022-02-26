@@ -7,6 +7,11 @@ someone has to make **insert** into SQL table for more than hundreds of columns.
 
 This bunch of code make it simple.
 
+### Instalation:
+```python
+pip install -r requirements.txt
+```
+
 ### How to work:
 just need implement some variables:
 
