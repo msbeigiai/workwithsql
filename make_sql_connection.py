@@ -45,9 +45,10 @@ class MakeSqlConnection:
 
         if command_type == 'select':
             value = self.cursor.fetchone()
+            # value = [x[0] for x in self.cursor.fetchall()]
             if value is None:
                 raise ValueError(f"Vale {self.table_name} is not exist.")
-            return value[0]
+            return value
 
     def __check_connection(self):
         self.__execution()
