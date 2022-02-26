@@ -35,7 +35,7 @@ dbwork.execute()
 ```
 it will bring new record to your existing database.
 
-consider that if your table has `primary_key`, this code will not work.
+🔔 **Notice**: if your table has `primary_key`, this code will not work.
 
 I am working on it that bring new records for tables with `PK`.
 
