@@ -14,17 +14,7 @@ command = (
 )
 data = (6632, "Mohsen", "Sattarkhan", 12365)
 
-# make_connection.execution_command(command=command, params=data, commit=True)
-
 dbwork = DatabaseWork(database, table_name, username, password)
-# print(dbwork.columns())
-# print(dbwork.number_of_records())
-# print(dbwork.random_record())
-# command_str = dbwork.columns_to_str()
-# print(command_str)
-# command, data = dbwork.make_command()
-
-# print(command, data)
 
 dbwork.execute()
 
