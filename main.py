@@ -1,10 +1,10 @@
 from make_sql_connection import MakeSqlConnection
 from database_work import DatabaseWork
 
-database = 'TestDb1'
+database = 'MicrosoftDynamicsAX'
 username = 'sa'
 password = 'testpassword'
-table_name = 'dbo.Store'
+table_name = 'dbo.RETAILTRANSACTIONTABLE'
 
 # make_connection = MakeSqlConnection(database, table_name, username, password)
 

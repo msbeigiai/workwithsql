@@ -1,6 +1,9 @@
+import pandas
+from datetime import datetime
 from make_sql_connection import MakeSqlConnection
 import pandas as pd
 from random import randint
+import numpy as np
 
 
 class DatabaseWork:
@@ -61,6 +64,28 @@ class DatabaseWork:
         data = self.__record_values()
         return command, data
 
+    def set_identity(self, situation):
+        if situation:
+            command = 'SET IDENTITY_INSERT ' + self.table_name + ' ON'
+        else:
+            command = 'SET IDENTITY_INSERT ' + self.table_name + ' OFF'
+        self.mksqlconn.execution_command(command)
+
     def execute(self):
+        # self.set_identity(True)
         command, data = self.make_command()
-        self.mksqlconn.execution_command(command=command, params=data, commit=True)
+        list_data = []
+        for value in data:
+            if type(value) == np.int64:
+                value = int(value)
+                list_data.append(value)
+            elif type(value) == pandas.Timestamp:
+                value = pd.to_datetime(value)
+                list_data.append(value)
+            else:
+                value = value
+                list_data.append(value)
+
+        list_data[0] = self.__number_of_records() + 1
+        params = tuple(val for val in list_data)
+        self.mksqlconn.execution_command(command=command, params=params, commit=True)
