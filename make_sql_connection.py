@@ -29,6 +29,10 @@ class MakeSqlConnection:
             self.cursor.execute(self.command, params)
             self.cnxn.commit()
             print("Commitment Done!")
+            commitment = False
+            if self.cnxn.commit():
+                commitment = True
+            return commitment
         else:
             self.cursor.execute(self.command)
         if not params and commit:
