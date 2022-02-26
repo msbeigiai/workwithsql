@@ -22,6 +22,11 @@ dbwork = DatabaseWork(database, table_name, username, password)
 # print(dbwork.random_record())
 # command_str = dbwork.columns_to_str()
 # print(command_str)
-record = dbwork.fetch_random_record()
+# command, data = dbwork.make_command()
 
-print(record)
+# print(command, data)
+
+dbwork.execute()
+
+
+
